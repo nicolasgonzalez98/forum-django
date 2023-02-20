@@ -7,12 +7,15 @@ from .forms import *
 def home(request):
     forums = Forum.objects.all()
     count = forums.count()
-
+    discussions = []
+    for i in forums:
+        discussions.append(i.discussion_set.all())
     
     
     ctx = {
         'forums': forums,
-        'count':count
+        'count':count,
+        'discussions':discussions
     }
     return render(request, 'home.html', ctx)
 
